@@ -33,4 +33,19 @@ public class ProductServiceImpl implements ProductService{
     public void remove(Long id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public Page<Product> findAllByQuantity(Pageable pageable) {
+        return productRepository.findAllByQuantity(pageable);
+    }
+
+    @Override
+    public Iterable<Product> findByName(String name) {
+        return productRepository.findAlByNameContaining(name);
+    }
+
+    @Override
+    public Iterable<Product> findAllOrderByPrice(boolean flag) {
+        return productRepository.findAllOrderByPrice(flag);
+    }
 }

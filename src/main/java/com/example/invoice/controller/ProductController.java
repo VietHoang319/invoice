@@ -46,4 +46,19 @@ public class ProductController {
         productService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/q300")
+    public ResponseEntity<Page<Product>> findAllByQuantity(@PageableDefault(value = 4) Pageable pageable) {
+        return  new ResponseEntity<>(productService.findAllByQuantity(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<Iterable<Product>> findByName(@RequestParam String name) {
+        return new ResponseEntity<>(productService.findByName(name), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderBy")
+    public ResponseEntity<Iterable<Product>> findAllOrderByPrice(@RequestParam boolean flag) {
+        return new ResponseEntity<>(productService.findAllOrderByPrice(flag), HttpStatus.OK);
+    }
 }
