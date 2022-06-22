@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -60,5 +61,10 @@ public class ProductController {
     @GetMapping("/orderBy")
     public ResponseEntity<Iterable<Product>> findAllOrderByPrice(@RequestParam boolean flag) {
         return new ResponseEntity<>(productService.findAllOrderByPrice(flag), HttpStatus.OK);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<Iterable<Object[]>> reportByCreateTime(@RequestParam String dateFrom, @RequestParam String dateTo) {
+        return new ResponseEntity<>(productService.reportByCreateTime(LocalDate.parse(dateFrom), LocalDate.parse(dateTo)), HttpStatus.OK);
     }
 }

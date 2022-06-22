@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -48,4 +49,11 @@ public class ProductServiceImpl implements ProductService{
     public Iterable<Product> findAllOrderByPrice(boolean flag) {
         return productRepository.findAllOrderByPrice(flag);
     }
+
+    @Override
+    public Iterable<Object[]> reportByCreateTime(LocalDate dateFrom, LocalDate dateTo) {
+        return productRepository.reportByCreateTime(dateFrom, dateTo);
+    }
+
+
 }
