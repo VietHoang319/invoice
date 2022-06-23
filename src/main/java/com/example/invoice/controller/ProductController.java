@@ -1,6 +1,7 @@
 package com.example.invoice.controller;
 
 import com.example.invoice.model.Product;
+import com.example.invoice.repository.no_entity.ReportByCreateAt;
 import com.example.invoice.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,7 +65,7 @@ public class ProductController {
     }
 
     @GetMapping("/report")
-    public ResponseEntity<Iterable<Object[]>> reportByCreateTime(@RequestParam String dateFrom, @RequestParam String dateTo) {
+    public ResponseEntity<Iterable<ReportByCreateAt>> reportByCreateTime(@RequestParam String dateFrom, @RequestParam String dateTo) {
         return new ResponseEntity<>(productService.reportByCreateTime(LocalDate.parse(dateFrom), LocalDate.parse(dateTo)), HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.example.invoice.service.product;
 
 import com.example.invoice.model.Product;
 import com.example.invoice.repository.ProductRepository;
+import com.example.invoice.repository.no_entity.ReportByCreateAt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Iterable<Object[]> reportByCreateTime(LocalDate dateFrom, LocalDate dateTo) {
+    public Iterable<ReportByCreateAt> reportByCreateTime(LocalDate dateFrom, LocalDate dateTo) {
         return productRepository.reportByCreateTime(dateFrom, dateTo);
     }
 
