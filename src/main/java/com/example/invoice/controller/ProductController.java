@@ -22,7 +22,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<Product>> findAll(@PageableDefault(value = 4) Pageable pageable) {
+    public ResponseEntity<Page<Product>> findAll(@PageableDefault(value = 30) Pageable pageable) {
         return new ResponseEntity<>(productService.findAll(pageable), HttpStatus.OK);
     }
 
@@ -67,5 +67,10 @@ public class ProductController {
     @GetMapping("/report")
     public ResponseEntity<Iterable<ReportByCreateAt>> reportByCreateTime(@RequestParam String dateFrom, @RequestParam String dateTo) {
         return new ResponseEntity<>(productService.reportByCreateTime(LocalDate.parse(dateFrom), LocalDate.parse(dateTo)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Product>> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 }
