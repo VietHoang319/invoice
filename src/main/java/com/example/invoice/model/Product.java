@@ -1,17 +1,25 @@
 package com.example.invoice.model;
 
+import com.example.invoice.model.validation.IProductValidatior;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Tên không được trống")
+    @Pattern(regexp = "[a-z]{3,16}", message = "Không được nhập số")
+    @IProductValidatior
     private String name;
     private long price;
+    @Min(value=3, message = "Nhập lớn hơn 3")
+    @Max(value = 10)
     private int quantity;
 
     public Product() {
