@@ -1,5 +1,6 @@
 package com.example.invoice.controller;
 
+import com.example.invoice.model.DTOInvoice;
 import com.example.invoice.model.Product;
 import com.example.invoice.repository.no_entity.ReportByCreateAt;
 import com.example.invoice.service.product.ProductService;
@@ -27,8 +28,8 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<Product>> findAll(@PageableDefault(value = 30) Pageable pageable) {
-        return new ResponseEntity<>(productService.findAll(pageable), HttpStatus.OK);
+    public ResponseEntity<DTOInvoice<Page<Product>>> findAll(@PageableDefault(value = 30) Pageable pageable) {
+        return new ResponseEntity<>(new DTOInvoice<Page<Product>>("Lấy danh sách thành công", productService.findAll(pageable), "OK"), HttpStatus.OK);
     }
 
     @PostMapping

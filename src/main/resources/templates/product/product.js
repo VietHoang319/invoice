@@ -3,8 +3,8 @@ function getAllProduct() {
         type: "GET",
         url: "http://localhost:8080/api/products",
         success: function (product) {
-            console.log(product.content)
-            displayProduct(product.content);
+            console.log(product.t.content)
+            displayProduct(product.t.content);
         }
     })
 }
