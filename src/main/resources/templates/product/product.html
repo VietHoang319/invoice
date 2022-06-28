@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body onload="getAllProduct()">
+<body onload="getAllProduct(0)">
 <br>
-<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">Thêm sản phẩm</button>
+<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal" onclick="resetData()">Thêm sản phẩm</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -28,6 +28,7 @@
                     <input id="name" type="text" class="form-control" aria-label="Sizing example input"
                            aria-describedby="inputGroup-sizing-default">
                 </div>
+                <p style="color: red" id="valiName"></p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Giá sản phẩm</span>
@@ -35,6 +36,7 @@
                     <input id="price" type="text" class="form-control" aria-label="Sizing example input"
                            aria-describedby="inputGroup-sizing-default">
                 </div>
+                <p style="color: red" id="valiQuantity"></p>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Số lượng sản phẩm</span>
@@ -65,6 +67,7 @@
     <tbody id="product_table">
     </tbody>
 </table>
+<div id="pageable"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
       integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

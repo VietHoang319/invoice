@@ -1,10 +1,27 @@
-function getAllProduct() {
+let pageable = $("#pageable")
+let valiName = $('#valiName')
+let valiQuantity = $('#valiQuantity')
+let id = $('#idP')
+let name = $('#name')
+let price = $('#price')
+let quantity = $('#quantity')
+function getAllProduct(number) {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/products",
+        url: "http://localhost:8080/api/products?page=" + number,
         success: function (product) {
-            console.log(product.t.content)
+            console.log(product)
+            let str = ""
             displayProduct(product.t.content);
+            let number1 = product.t.pageable.pageNumber;
+            if (product.t.pageable.pageNumber > 0 && product.t.pageable.pageNumber+1 === product.t.totalPages) {
+                str += `<button onclick="getAllProduct(${number1 - 1})">Trước</button> `;
+            }
+            str += product.t.pageable.pageNumber+1 + "/" + product.t.totalPages
+            if (product.t.pageable.pageNumber <= 0 && product.t.pageable.pageNumber+1 !== product.t.totalPages) {
+                str += ` <button onclick="getAllProduct(${number1 + 1})">Sau</button>`;
+            }
+            pageable.html(str)
         }
     })
 }
@@ -25,10 +42,6 @@ function displayProduct(array) {
 }
 
 function save() {
-    let id = $('#idP')
-    let name = $('#name')
-    let price = $('#price')
-    let quantity = $('#quantity')
     let product = {
         name: name.val(),
         price: price.val(),
@@ -49,7 +62,11 @@ function save() {
                 price.val("");
                 quantity.val("");
                 $('#exampleModal').modal('hide');
-                getAllProduct();
+                getAllProduct(0);
+            },
+            error: function (error) {
+                valiName.text(error.responseJSON.name)
+                valiQuantity.text(error.responseJSON.quantity)
             }
         })
     }
@@ -67,7 +84,7 @@ function save() {
                 price.val("");
                 quantity.val("");
                 $('#exampleModal').modal('hide');
-                getAllProduct();
+                getAllProduct(0);
             }
         })
     }
@@ -78,7 +95,7 @@ function deleteP(id) {
         type: 'delete',
         url: "http://localhost:8080/api/products/" + id,
         success: function () {
-            getAllProduct();
+            getAllProduct(0);
         }
     })
 }
@@ -104,4 +121,13 @@ function showModal(id) {
             $('#exampleModal').modal('show');
         }
     })
+}
+
+function resetData() {
+    valiName.text("")
+    valiQuantity.text("")
+    id.val("")
+    name.val("")
+    price.val("")
+    quantity.val("")
 }

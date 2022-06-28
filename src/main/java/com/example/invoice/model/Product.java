@@ -14,12 +14,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Tên không được trống")
-    @Pattern(regexp = "[a-z]{3,16}", message = "Không được nhập số")
+    @Pattern(regexp = "[a-zA-Z\\s]{3,16}", message = "Không được nhập số")
     @IProductValidatior
     private String name;
     private long price;
     @Min(value=3, message = "Nhập lớn hơn 3")
-    @Max(value = 10)
+    @Max(value = 10, message = "Nhập nhỏ hơn 10")
     private int quantity;
 
     public Product() {

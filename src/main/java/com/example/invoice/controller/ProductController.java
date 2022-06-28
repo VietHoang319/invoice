@@ -28,7 +28,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    public ResponseEntity<DTOInvoice<Page<Product>>> findAll(@PageableDefault(value = 30) Pageable pageable) {
+    public ResponseEntity<DTOInvoice<Page<Product>>> findAll(@PageableDefault(value = 3) Pageable pageable) {
         return new ResponseEntity<>(new DTOInvoice<Page<Product>>("Lấy danh sách thành công", productService.findAll(pageable), "OK"), HttpStatus.OK);
     }
 
